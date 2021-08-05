@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0.3 (Python 3.8.2 on win32)" generated="20210805 13:16:38.089" rpa="false" schemaversion="2">
+<suite id="s1" name="TC03 GETAPI withparameter" source="D:\PycharmProjects\Testcase details\TC03_GETAPI_withparameter.robot">
+<test id="s1-t1" name="TC003_validate get request with parameter">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>Getparameter</arg>
+<arg>${baseUrl}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210805 13:16:39.042" level="INFO">Creating Session using : alias=Getparameter, url=https://reqres.in, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210805 13:16:39.042" endtime="20210805 13:16:39.042"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{parameters}</var>
+<arg>page=2</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210805 13:16:39.042" level="INFO">&amp;{parameters} = { page=2 }</msg>
+<status status="PASS" starttime="20210805 13:16:39.042" endtime="20210805 13:16:39.042"/>
+</kw>
+<kw name="Get On Session" library="RequestsLibrary">
+<var>${responsedata}</var>
+<arg>Getparameter</arg>
+<arg>api/users</arg>
+<arg>params=${parameters}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20210805 13:16:39.511" level="INFO">GET Request : url=https://reqres.in/api/users?page=2 
+ path_url=/api/users?page=2 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210805 13:16:39.511" level="INFO">GET Response : url=https://reqres.in/api/users?page=2 
+ status=200, reason=OK 
+ headers={'Date': 'Thu, 05 Aug 2021 07:46:39 GMT', 'Content-Type': 'application/json; charset=utf-8', 'Transfer-Encoding': 'chunked', 'Connection': 'keep-alive', 'X-Powered-By': 'Express', 'Access-Control-Allow-Origin': '*', 'Etag': 'W/"406-ut0vzoCuidvyMf8arZpMpJ6ZRDw"', 'Via': '1.1 vegur', 'Cache-Control': 'max-age=14400', 'CF-Cache-Status': 'HIT', 'Age': '193', 'Expect-CT': 'max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"', 'Report-To': '{"endpoints":[{"url":"https:\\/\\/a.nel.cloudflare.com\\/report\\/v3?s=tO0KxHn0bqkW%2B5%2B9MEi5qhfi4dtSzy06lE5iwSPsDSKjHb7c891wMI9t5h8Q%2Bd1Bvp0JO0rC2d%2FNtXZUZh0d4wEggUJSBPAeYnxKHyaQ4rEvb7AZNl4jleqtpb0%3D"}],"group":"cf-nel","max_age":604800}', 'NEL': '{"success_fraction":0,"report_to":"cf-nel","max_age":604800}', 'Vary': 'Accept-Encoding', 'Server': 'cloudflare', 'CF-RAY': '679e69b4a82e4af8-HYD', 'Content-Encoding': 'gzip', 'alt-svc': 'h3-27=":443"; ma=86400, h3-28=":443"; ma=86400, h3-29=":443"; ma=86400, h3=":443"; ma=86400'} 
+ body={"page":2,"per_page":6,"total":12,"total_pages":2,"data":[{"id":7,"email":"michael.lawson@reqres.in","first_name":"Michael","last_name":"Lawson","avatar":"https://reqres.in/img/faces/7-image.jpg"},{"id":8,"email":"lindsay.ferguson@reqres.in","first_name":"Lindsay","last_name":"Ferguson","avatar":"https://reqres.in/img/faces/8-image.jpg"},{"id":9,"email":"tobias.funke@reqres.in","first_name":"Tobias","last_name":"Funke","avatar":"https://reqres.in/img/faces/9-image.jpg"},{"id":10,"email":"byron.fields@reqres.in","first_name":"Byron","last_name":"Fields","avatar":"https://reqres.in/img/faces/10-image.jpg"},{"id":11,"email":"george.edwards@reqres.in","first_name":"George","last_name":"Edwards","avatar":"https://reqres.in/img/faces/11-image.jpg"},{"id":12,"email":"rachel.howell@reqres.in","first_name":"Rachel","last_name":"Howell","avatar":"https://reqres.in/img/faces/12-image.jpg"}],"support":{"url":"https://reqres.in/#support-heading","text":"To keep ReqRes free, contributions towards server costs are appreciated!"}} 
+ </msg>
+<msg timestamp="20210805 13:16:39.527" level="INFO">d:\pycharmprojects\venv\lib\site-packages\urllib3\connectionpool.py:1013: InsecureRequestWarning: Unverified HTTPS request is being made to host 'reqres.in'. Adding certificate verification is strongly advised. See: https://urllib3.readthedocs.io/en/latest/advanced-usage.html#ssl-warnings
+  warnings.warn(</msg>
+<msg timestamp="20210805 13:16:39.527" level="INFO">${responsedata} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210805 13:16:39.042" endtime="20210805 13:16:39.527"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${actualcode}</var>
+<arg>${responsedata.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210805 13:16:39.542" level="INFO">${actualcode} = 200</msg>
+<status status="PASS" starttime="20210805 13:16:39.527" endtime="20210805 13:16:39.542"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${actualcode}</arg>
+<arg>200</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210805 13:16:39.558" endtime="20210805 13:16:39.558"/>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<var>${jsonresponse}</var>
+<arg>${responsedata.content}</arg>
+<doc>*DEPRECATED* Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</doc>
+<msg timestamp="20210805 13:16:39.558" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20210805 13:16:39.574" level="INFO">To JSON using : content={"page":2,"per_page":6,"total":12,"total_pages":2,"data":[{"id":7,"email":"michael.lawson@reqres.in","first_name":"Michael","last_name":"Lawson","avatar":"https://reqres.in/img/faces/7-image.jpg"},{"id":8,"email":"lindsay.ferguson@reqres.in","first_name":"Lindsay","last_name":"Ferguson","avatar":"https://reqres.in/img/faces/8-image.jpg"},{"id":9,"email":"tobias.funke@reqres.in","first_name":"Tobias","last_name":"Funke","avatar":"https://reqres.in/img/faces/9-image.jpg"},{"id":10,"email":"byron.fields@reqres.in","first_name":"Byron","last_name":"Fields","avatar":"https://reqres.in/img/faces/10-image.jpg"},{"id":11,"email":"george.edwards@reqres.in","first_name":"George","last_name":"Edwards","avatar":"https://reqres.in/img/faces/11-image.jpg"},{"id":12,"email":"rachel.howell@reqres.in","first_name":"Rachel","last_name":"Howell","avatar":"https://reqres.in/img/faces/12-image.jpg"}],"support":{"url":"https://reqres.in/#support-heading","text":"To keep ReqRes free, contributions towards server costs are appreciated!"}} </msg>
+<msg timestamp="20210805 13:16:39.574" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20210805 13:16:39.574" level="INFO">${jsonresponse} = {'page': 2, 'per_page': 6, 'total': 12, 'total_pages': 2, 'data': [{'id': 7, 'email': 'michael.lawson@reqres.in', 'first_name': 'Michael', 'last_name': 'Lawson', 'avatar': 'https://reqres.in/img/faces...</msg>
+<status status="PASS" starttime="20210805 13:16:39.558" endtime="20210805 13:16:39.574"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>@{valuefromjson}</var>
+<arg>${jsonresponse}</arg>
+<arg>data[0].first_name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20210805 13:16:39.714" level="INFO">@{valuefromjson} = [ Michael ]</msg>
+<status status="PASS" starttime="20210805 13:16:39.574" endtime="20210805 13:16:39.714"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>@{valuefromjson}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210805 13:16:39.714" endtime="20210805 13:16:39.730"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${firstname}</var>
+<arg>${valuefromjson}</arg>
+<arg>0</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20210805 13:16:39.730" level="INFO">${firstname} = Michael</msg>
+<status status="PASS" starttime="20210805 13:16:39.730" endtime="20210805 13:16:39.730"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${firstname}</arg>
+<arg>Michael</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210805 13:16:39.730" endtime="20210805 13:16:39.730"/>
+</kw>
+<status status="PASS" starttime="20210805 13:16:39.042" endtime="20210805 13:16:39.730"/>
+</test>
+<status status="PASS" starttime="20210805 13:16:38.105" endtime="20210805 13:16:39.730"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="TC03 GETAPI withparameter">TC03 GETAPI withparameter</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20210805 13:16:39.558" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+</errors>
+</robot>
