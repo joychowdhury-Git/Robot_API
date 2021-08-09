@@ -1,14 +1,8 @@
 *** Settings ***
 Library    RequestsLibrary
-Library    RequestsLibrary
 Library    JSONLibrary
 Library    Collections
-Library    RequestsLibrary
-Library    JSONLibrary
-Library    Collections
-Library    RequestsLibrary
-Library    JSONLibrary
-Library    Collections
+
 
 *** Variables ***
 ${baseUrl}  https://reqres.in
@@ -17,6 +11,7 @@ ${baseUrl}  https://reqres.in
 TC003_validate get request with parameter
     create session    Getparameter    ${baseUrl}
     &{parameters}=  create dictionary    page=2
+    #for parameter we are sending params
     ${responsedata}=  get on session    Getparameter   api/users    params=${parameters}
     #log to console    ${responsedata.content}
    # log to console    ${responsedata.status_code}
