@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 4.0.3 (Python 3.8.2 on win32)" generated="20210809 16:52:04.755" rpa="false" schemaversion="2">
+<suite id="s1" name="E2E API" source="D:\PycharmProjects\Testcase details\E2E_API.robot">
+<test id="s1-t1" name="TC01_E2E testcaswe">
+<kw name="Create Session" library="RequestsLibrary">
+<arg>E2E</arg>
+<arg>${baseUrl}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<msg timestamp="20210809 16:52:05.569" level="INFO">Creating Session using : alias=E2E, url=http://thetestingworldapi.com/, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<status status="PASS" starttime="20210809 16:52:05.567" endtime="20210809 16:52:05.570"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body}</var>
+<arg>first_name=${original_firstname}</arg>
+<arg>middle_name=World</arg>
+<arg>last_name=Shine</arg>
+<arg>date_of_birth=01/06/1990</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210809 16:52:05.573" level="INFO">&amp;{body} = { first_name=Hello | middle_name=World | last_name=Shine | date_of_birth=01/06/1990 }</msg>
+<status status="PASS" starttime="20210809 16:52:05.571" endtime="20210809 16:52:05.573"/>
+</kw>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{header}</var>
+<arg>Content-Type=application/json</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210809 16:52:05.575" level="INFO">&amp;{header} = { Content-Type=application/json }</msg>
+<status status="PASS" starttime="20210809 16:52:05.574" endtime="20210809 16:52:05.575"/>
+</kw>
+<kw name="Post Request" library="RequestsLibrary">
+<var>${post_response}</var>
+<arg>E2E</arg>
+<arg>api/studentsDetails</arg>
+<arg>data=${body}</arg>
+<arg>headers=${header}</arg>
+<doc>*DEPRECATED* Please use `POST On Session` instead.</doc>
+<msg timestamp="20210809 16:52:05.576" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg timestamp="20210809 16:52:06.286" level="INFO">POST Request : url=http://thetestingworldapi.com/api/studentsDetails 
+ path_url=/api/studentsDetails 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '100'} 
+ body={"first_name": "Hello", "middle_name": "World", "last_name": "Shine", "date_of_birth": "01/06/1990"} 
+ </msg>
+<msg timestamp="20210809 16:52:06.288" level="INFO">POST Response : url=http://thetestingworldapi.com/api/studentsDetails 
+ status=201, reason=Created 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Location': 'http://thetestingworldapi.com/api/studentsDetails/417744', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Mon, 09 Aug 2021 11:22:06 GMT', 'Content-Length': '105'} 
+ body={"id":417744,"first_name":"Hello","middle_name":"World","last_name":"Shine","date_of_birth":"01/06/1990"} 
+ </msg>
+<msg timestamp="20210809 16:52:06.289" level="INFO">${post_response} = &lt;Response [201]&gt;</msg>
+<status status="PASS" starttime="20210809 16:52:05.576" endtime="20210809 16:52:06.290"/>
+</kw>
+<kw name="Convert To String" library="BuiltIn">
+<var>${actualcode}</var>
+<arg>${post_response.status_code}</arg>
+<doc>Converts the given item to a Unicode string.</doc>
+<msg timestamp="20210809 16:52:06.303" level="INFO">${actualcode} = 201</msg>
+<status status="PASS" starttime="20210809 16:52:06.294" endtime="20210809 16:52:06.303"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${actualcode}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210809 16:52:06.304" endtime="20210809 16:52:06.305"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${actualcode}</arg>
+<arg>201</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210809 16:52:06.306" endtime="20210809 16:52:06.308"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${post_response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210809 16:52:06.308" endtime="20210809 16:52:06.311"/>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<var>${json_response}</var>
+<arg>${post_response.content}</arg>
+<doc>*DEPRECATED* Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</doc>
+<msg timestamp="20210809 16:52:06.313" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20210809 16:52:06.317" level="INFO">To JSON using : content={"id":417744,"first_name":"Hello","middle_name":"World","last_name":"Shine","date_of_birth":"01/06/1990"} </msg>
+<msg timestamp="20210809 16:52:06.317" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20210809 16:52:06.317" level="INFO">${json_response} = {'id': 417744, 'first_name': 'Hello', 'middle_name': 'World', 'last_name': 'Shine', 'date_of_birth': '01/06/1990'}</msg>
+<status status="PASS" starttime="20210809 16:52:06.312" endtime="20210809 16:52:06.317"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>@{id_list}</var>
+<arg>${json_response}</arg>
+<arg>id</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20210809 16:52:06.414" level="INFO">@{id_list} = [ 417744 ]</msg>
+<status status="PASS" starttime="20210809 16:52:06.318" endtime="20210809 16:52:06.414"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${id}</var>
+<arg>${id_list}</arg>
+<arg>0</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20210809 16:52:06.415" level="INFO">${id} = 417744</msg>
+<status status="PASS" starttime="20210809 16:52:06.415" endtime="20210809 16:52:06.416"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${id}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210809 16:52:06.416" endtime="20210809 16:52:06.417"/>
+</kw>
+<kw name="Put request data" library="resource">
+<arg>${id}</arg>
+<arg>${header}</arg>
+<kw name="Create Dictionary" library="BuiltIn">
+<var>&amp;{body1}</var>
+<arg>id=${id}</arg>
+<arg>first_name=${update_firstname}</arg>
+<arg>middle_name=World</arg>
+<arg>last_name=Shine</arg>
+<arg>date_of_birth=01/06/1990</arg>
+<doc>Creates and returns a dictionary based on the given ``items``.</doc>
+<msg timestamp="20210809 16:52:06.422" level="INFO">&amp;{body1} = { id=417744 | first_name=Testing | middle_name=World | last_name=Shine | date_of_birth=01/06/1990 }</msg>
+<status status="PASS" starttime="20210809 16:52:06.420" endtime="20210809 16:52:06.422"/>
+</kw>
+<kw name="Put Request" library="RequestsLibrary">
+<var>${put_response}</var>
+<arg>E2E</arg>
+<arg>api/studentsDetails/${id}</arg>
+<arg>data=${body1}</arg>
+<arg>headers=${header}</arg>
+<doc>*DEPRECATED* Please use `PUT On Session` instead.</doc>
+<msg timestamp="20210809 16:52:06.424" level="WARN">Keyword 'RequestsLibrary.Put Request' is deprecated. Please use `PUT On Session` instead.</msg>
+<msg timestamp="20210809 16:52:07.533" level="INFO">PUT Request : url=http://thetestingworldapi.com/api/studentsDetails/417744 
+ path_url=/api/studentsDetails/417744 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Type': 'application/json', 'Content-Length': '116'} 
+ body={"id": 417744, "first_name": "Testing", "middle_name": "World", "last_name": "Shine", "date_of_birth": "01/06/1990"} 
+ </msg>
+<msg timestamp="20210809 16:52:07.534" level="INFO">PUT Response : url=http://thetestingworldapi.com/api/studentsDetails/417744 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Mon, 09 Aug 2021 11:22:07 GMT', 'Content-Length': '46'} 
+ body={"status":"true","msg":"update  data success"} 
+ </msg>
+<msg timestamp="20210809 16:52:07.535" level="INFO">${put_response} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210809 16:52:06.423" endtime="20210809 16:52:07.535"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${put_response.content}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210809 16:52:07.535" endtime="20210809 16:52:07.539"/>
+</kw>
+<kw name="Log To Console" library="BuiltIn">
+<arg>${put_response.status_code}</arg>
+<doc>Logs the given message to the console.</doc>
+<status status="PASS" starttime="20210809 16:52:07.539" endtime="20210809 16:52:07.542"/>
+</kw>
+<status status="PASS" starttime="20210809 16:52:06.418" endtime="20210809 16:52:07.543"/>
+</kw>
+<kw name="Get details and validate" library="resource">
+<arg>${id}</arg>
+<kw name="Get On Session" library="RequestsLibrary">
+<var>${getrequest}</var>
+<arg>E2E</arg>
+<arg>api/studentsDetails/${id}</arg>
+<doc>Sends a GET request on a previously created HTTP Session.</doc>
+<msg timestamp="20210809 16:52:08.074" level="INFO">GET Request : url=http://thetestingworldapi.com/api/studentsDetails/417744 
+ path_url=/api/studentsDetails/417744 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive'} 
+ body=None 
+ </msg>
+<msg timestamp="20210809 16:52:08.074" level="INFO">GET Response : url=http://thetestingworldapi.com/api/studentsDetails/417744 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Mon, 09 Aug 2021 11:22:07 GMT', 'Content-Length': '132'} 
+ body={"status":"true","data":{"id":417744,"first_name":"Testing","middle_name":"World","last_name":"Shine","date_of_birth":"01/06/1990"}} 
+ </msg>
+<msg timestamp="20210809 16:52:08.075" level="INFO">${getrequest} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210809 16:52:07.545" endtime="20210809 16:52:08.075"/>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<var>${getrequest_json}</var>
+<arg>${getrequest.content}</arg>
+<doc>*DEPRECATED* Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</doc>
+<msg timestamp="20210809 16:52:08.077" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20210809 16:52:08.083" level="INFO">To JSON using : content={"status":"true","data":{"id":417744,"first_name":"Testing","middle_name":"World","last_name":"Shine","date_of_birth":"01/06/1990"}} </msg>
+<msg timestamp="20210809 16:52:08.083" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20210809 16:52:08.084" level="INFO">${getrequest_json} = {'status': 'true', 'data': {'id': 417744, 'first_name': 'Testing', 'middle_name': 'World', 'last_name': 'Shine', 'date_of_birth': '01/06/1990'}}</msg>
+<status status="PASS" starttime="20210809 16:52:08.076" endtime="20210809 16:52:08.084"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>@{jsonlistvalue}</var>
+<arg>${getrequest_json}</arg>
+<arg>data.first_name</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20210809 16:52:08.174" level="INFO">@{jsonlistvalue} = [ Testing ]</msg>
+<status status="PASS" starttime="20210809 16:52:08.085" endtime="20210809 16:52:08.174"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${firstname}</var>
+<arg>${jsonlistvalue}</arg>
+<arg>0</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20210809 16:52:08.175" level="INFO">${firstname} = Testing</msg>
+<status status="PASS" starttime="20210809 16:52:08.174" endtime="20210809 16:52:08.175"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${firstname}</arg>
+<arg>${update_firstname}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210809 16:52:08.176" endtime="20210809 16:52:08.177"/>
+</kw>
+<status status="PASS" starttime="20210809 16:52:07.544" endtime="20210809 16:52:08.177"/>
+</kw>
+<kw name="Delete request data" library="resource">
+<arg>${id}</arg>
+<kw name="Delete Request" library="RequestsLibrary">
+<var>${deleterequest}</var>
+<arg>E2E</arg>
+<arg>api/studentsDetails/${id}</arg>
+<doc>*DEPRECATED* Please use `DELETE On Session` instead.</doc>
+<msg timestamp="20210809 16:52:08.180" level="WARN">Keyword 'RequestsLibrary.Delete Request' is deprecated. Please use `DELETE On Session` instead.</msg>
+<msg timestamp="20210809 16:52:10.220" level="INFO">DELETE Request : url=http://thetestingworldapi.com/api/studentsDetails/417744 
+ path_url=/api/studentsDetails/417744 
+ headers={'User-Agent': 'python-requests/2.25.1', 'Accept-Encoding': 'gzip, deflate', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '0'} 
+ body=None 
+ </msg>
+<msg timestamp="20210809 16:52:10.222" level="INFO">DELETE Response : url=http://thetestingworldapi.com/api/studentsDetails/417744 
+ status=200, reason=OK 
+ headers={'Cache-Control': 'no-cache', 'Pragma': 'no-cache', 'Content-Type': 'application/json; charset=utf-8', 'Expires': '-1', 'Server': 'Microsoft-IIS/8.5', 'X-AspNet-Version': '4.0.30319', 'X-Powered-By': 'ASP.NET', 'X-Powered-By-Plesk': 'PleskWin', 'Date': 'Mon, 09 Aug 2021 11:22:09 GMT', 'Content-Length': '46'} 
+ body={"status":"true","msg":"Delete  data success"} 
+ </msg>
+<msg timestamp="20210809 16:52:10.223" level="INFO">${deleterequest} = &lt;Response [200]&gt;</msg>
+<status status="PASS" starttime="20210809 16:52:08.179" endtime="20210809 16:52:10.224"/>
+</kw>
+<kw name="To Json" library="RequestsLibrary">
+<var>${deletejson}</var>
+<arg>${deleterequest.content}</arg>
+<doc>*DEPRECATED* Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</doc>
+<msg timestamp="20210809 16:52:10.227" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20210809 16:52:10.238" level="INFO">To JSON using : content={"status":"true","msg":"Delete  data success"} </msg>
+<msg timestamp="20210809 16:52:10.238" level="INFO">To JSON using : pretty_print=False </msg>
+<msg timestamp="20210809 16:52:10.239" level="INFO">${deletejson} = {'status': 'true', 'msg': 'Delete  data success'}</msg>
+<status status="PASS" starttime="20210809 16:52:10.225" endtime="20210809 16:52:10.239"/>
+</kw>
+<kw name="Get Value From Json" library="JSONLibrary">
+<var>@{jsondeletevalue}</var>
+<arg>${deletejson}</arg>
+<arg>status</arg>
+<doc>Get Value From JSON using JSONPath</doc>
+<msg timestamp="20210809 16:52:10.331" level="INFO">@{jsondeletevalue} = [ true ]</msg>
+<status status="PASS" starttime="20210809 16:52:10.240" endtime="20210809 16:52:10.331"/>
+</kw>
+<kw name="Get From List" library="Collections">
+<var>${statusvalue}</var>
+<arg>${jsondeletevalue}</arg>
+<arg>0</arg>
+<doc>Returns the value specified with an ``index`` from ``list``.</doc>
+<msg timestamp="20210809 16:52:10.333" level="INFO">${statusvalue} = true</msg>
+<status status="PASS" starttime="20210809 16:52:10.332" endtime="20210809 16:52:10.333"/>
+</kw>
+<kw name="Should Be Equal" library="BuiltIn">
+<arg>${statusvalue}</arg>
+<arg>true</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" starttime="20210809 16:52:10.333" endtime="20210809 16:52:10.334"/>
+</kw>
+<status status="PASS" starttime="20210809 16:52:08.178" endtime="20210809 16:52:10.335"/>
+</kw>
+<status status="PASS" starttime="20210809 16:52:05.566" endtime="20210809 16:52:10.336"/>
+</test>
+<status status="PASS" starttime="20210809 16:52:04.761" endtime="20210809 16:52:10.339"/>
+</suite>
+<statistics>
+<total>
+<stat pass="1" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat pass="1" fail="0" skip="0" id="s1" name="E2E API">E2E API</stat>
+</suite>
+</statistics>
+<errors>
+<msg timestamp="20210809 16:52:05.576" level="WARN">Keyword 'RequestsLibrary.Post Request' is deprecated. Please use `POST On Session` instead.</msg>
+<msg timestamp="20210809 16:52:06.313" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20210809 16:52:06.424" level="WARN">Keyword 'RequestsLibrary.Put Request' is deprecated. Please use `PUT On Session` instead.</msg>
+<msg timestamp="20210809 16:52:08.077" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+<msg timestamp="20210809 16:52:08.180" level="WARN">Keyword 'RequestsLibrary.Delete Request' is deprecated. Please use `DELETE On Session` instead.</msg>
+<msg timestamp="20210809 16:52:10.227" level="WARN">Keyword 'RequestsLibrary.To Json' is deprecated. Please use ${resp.json()} instead. Have a look at the improved HTML output as pretty printing replacement.</msg>
+</errors>
+</robot>
